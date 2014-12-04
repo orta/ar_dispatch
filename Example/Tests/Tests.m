@@ -54,6 +54,7 @@ describe(@"in app context", ^{
     it(@"does ar_dispatch_after sync", ^{
 
         ar_dispatch_after(10, ^{
+            sleep(5);
             ran = YES;
         });
         expect(ran).to.beFalsy();
@@ -62,6 +63,7 @@ describe(@"in app context", ^{
     it(@"does ar_dispatch_main_queue sync", ^{
 
         ar_dispatch_main_queue( ^{
+            sleep(5);
             ran = YES;
         });
         expect(ran).to.beFalsy();
@@ -70,6 +72,7 @@ describe(@"in app context", ^{
     it(@"does ar_dispatch_async sync", ^{
 
         ar_dispatch_async(^{
+            sleep(5);
             ran = YES;
         });
         expect(ran).to.beFalsy();
