@@ -1,0 +1,1 @@
+PODS_AR_DISPATCH_AR_DISPATCH_OTHER_LDFLAGS = -framework "Foundation"

@@ -1,0 +1,6 @@
+#include "Pods-ar_dispatch-Specta.xcconfig"
+FRAMEWORK_SEARCH_PATHS = ${PODS_AR_DISPATCH_SPECTA_FRAMEWORK_SEARCH_PATHS}
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Build" "${PODS_ROOT}/Headers/Build/Specta" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Expecta" "${PODS_ROOT}/Headers/Public/Specta" "${PODS_ROOT}/Headers/Public/ar_dispatch"
+OTHER_LDFLAGS = ${PODS_AR_DISPATCH_SPECTA_OTHER_LDFLAGS} -ObjC
+PODS_ROOT = ${SRCROOT}

@@ -1,43 +1,80 @@
-//
-//  ar_dispatchTests.m
-//  ar_dispatchTests
-//
-//  Created by Orta Therox on 12/04/2014.
-//  Copyright (c) 2014 Orta Therox. All rights reserved.
-//
+#import <ar_dispatch/ar_dispatch.h>
 
-SpecBegin(InitialSpecs)
+// ar_dispatch_after(NSTimeInterval time, dispatch_block_t block);
+// ar_dispatch_after_on_queue(NSTimeInterval time, dispatch_queue_t queue, dispatch_block_t block);
+// ar_dispatch_async(dispatch_block_t block);
+// ar_dispatch_main_queue(dispatch_block_t block);
+// ar_dispatch_on_queue(dispatch_queue_t queue, dispatch_block_t block);
 
-describe(@"these will fail", ^{
+SpecBegin(Dispatches)
 
-    it(@"can do maths", ^{
-        expect(1).to.equal(2);
+describe(@"in test context", ^{
+    __block BOOL ran = NO;
+
+    before(^{
+        ARDispatchIsRunningInTests = YES;
+        ran = NO;
     });
 
-    it(@"can read", ^{
-        expect(@"number").to.equal(@"string");
+
+    it(@"does ar_dispatch_after sync", ^{
+
+        ar_dispatch_after(10, ^{
+            ran = YES;
+        });
+        expect(ran).to.beTruthy();
     });
-    
-    it(@"will wait and fail", ^AsyncBlock {
-        
+
+    it(@"does ar_dispatch_main_queue sync", ^{
+
+        ar_dispatch_main_queue( ^{
+            ran = YES;
+        });
+        expect(ran).to.beTruthy();
     });
+
+    it(@"does ar_dispatch_async sync", ^{
+
+        ar_dispatch_async(^{
+            ran = YES;
+        });
+        expect(ran).to.beTruthy();
+    });
+
 });
 
-describe(@"these will pass", ^{
-    
-    it(@"can do maths", ^{
-        expect(1).beLessThan(23);
+describe(@"in app context", ^{
+    __block BOOL ran = NO;
+
+    before(^{
+        ARDispatchIsRunningInTests = NO;
+        ran = NO;
     });
-    
-    it(@"can read", ^{
-        expect(@"team").toNot.contain(@"I");
-    });
-    
-    it(@"will wait and succeed", ^AsyncBlock {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            done();
+
+    it(@"does ar_dispatch_after sync", ^{
+
+        ar_dispatch_after(10, ^{
+            ran = YES;
         });
+        expect(ran).to.beFalsy();
     });
+
+    it(@"does ar_dispatch_main_queue sync", ^{
+
+        ar_dispatch_main_queue( ^{
+            ran = YES;
+        });
+        expect(ran).to.beFalsy();
+    });
+
+    it(@"does ar_dispatch_async sync", ^{
+
+        ar_dispatch_async(^{
+            ran = YES;
+        });
+        expect(ran).to.beFalsy();
+    });
+    
 });
 
 SpecEnd

@@ -1,0 +1,5 @@
+#include "Pods-ar_dispatch-ar_dispatch.xcconfig"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Build" "${PODS_ROOT}/Headers/Build/ar_dispatch" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Expecta" "${PODS_ROOT}/Headers/Public/Specta" "${PODS_ROOT}/Headers/Public/ar_dispatch"
+OTHER_LDFLAGS = ${PODS_AR_DISPATCH_AR_DISPATCH_OTHER_LDFLAGS} -ObjC
+PODS_ROOT = ${SRCROOT}
